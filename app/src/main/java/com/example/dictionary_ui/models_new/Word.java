@@ -9,7 +9,6 @@ public class Word {
     private List<Phonetics> phonetics;
     private List<Meaning> meanings;
     private License license;
-    private List<String> sourceUrls;
     private String created_at;
     private String updated_at;
     private Integer search_count;
@@ -85,31 +84,8 @@ public class Word {
         this.search_count = search_count;
     }
 
-    public String getCategory() {
-        return "";
-    }
-
-    public String getTitle() {
-        return word;
-    }
-
-    public String getGrammar() {
-        return meanings.get(0).getPartOfSpeech();
-    }
-
-    public String getInfl() {
-        return "";
-    }
-
-    public String getInfo() {
-        return "";
-    }
-
     public Phonetics getPronounce() {
         return phonetics.get(0);
     }
 
-    public List<Meaning> getContents() {
-        return meanings;
-    }
 }

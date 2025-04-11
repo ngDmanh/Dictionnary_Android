@@ -25,7 +25,6 @@ import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity {
     private CambridgeService cambridgeService;
-    private TextView tvTitle;
     private ImageButton ibFind;
     private EditText etWrite;
     private ImageButton ibClose;
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     void initView() {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        tvTitle = findViewById(R.id.tvTitle);
         ibFind = findViewById(R.id.ibFind);
         etWrite = findViewById(R.id.etWrite);
         ibClose = findViewById(R.id.ibClose);

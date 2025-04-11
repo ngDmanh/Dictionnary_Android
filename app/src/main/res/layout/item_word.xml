@@ -9,7 +9,6 @@
     android:paddingHorizontal="6dp"
     android:paddingTop="6dp">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,43 +16,14 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:textColor="@color/dark_blue"
-            android:textSize="24sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             tools:text="Beautiful" />
-
-        <TextView
-            android:id="@+id/tvGrammar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/tvTitle"
-            android:layout_below="@id/tvTitle"
-            android:layout_marginTop="6dp"
-            android:textColor="@color/dark_blue"
-            android:textSize="16sp"
-            android:textStyle="italic"
-            tools:text="exclammation" />
-
-        <TextView
-            android:id="@+id/tvPronounceUSTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/tvPronounceUS"
-            android:layout_alignBottom="@id/tvPronounceUS"
-            android:layout_marginEnd="6dp"
-            android:layout_toStartOf="@id/tvPronounceUS"
-            android:drawablePadding="4dp"
-            android:gravity="center"
-            android:text="@string/pronounce_us_title"
-            android:textColor="@color/dark_blue"
-            android:textSize="14sp"
-            android:textStyle="italic"
-            app:drawableEndCompat="@drawable/ic_sound"
-            app:drawableTint="@color/dark_blue" />
 
         <TextView
             android:id="@+id/tvPronounceUS"
@@ -68,45 +38,96 @@
             android:textStyle="italic"
             tools:text="/ˈbjuː.t̬ə.fəl/" />
 
-        <TextView
-            android:id="@+id/tvPronounceUKTitle"
+        <LinearLayout
+            android:id="@+id/layoutPronounceUSTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/tvPronounceUK"
-            android:layout_alignBottom="@id/tvPronounceUK"
+            android:layout_height="48dp"
+            android:layout_toStartOf="@id/tvPronounceUS"
+            android:layout_alignTop="@id/tvPronounceUS"
+            android:layout_marginTop="-12dp"
             android:layout_marginEnd="6dp"
-            android:layout_toStartOf="@id/tvPronounceUK"
-            android:drawablePadding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:minWidth="48dp"
             android:gravity="center"
-            android:text="@string/pronounce_uk_title"
-            android:textColor="@color/dark_blue"
-            android:textSize="14sp"
-            android:textStyle="italic"
-            app:drawableEndCompat="@drawable/ic_sound"
-            app:drawableTint="@color/dark_blue" />
+            android:paddingHorizontal="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pronounce_us_title"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_sound"
+                app:tint="@color/dark_blue"
+                android:contentDescription="@string/pronounce_sound" />
+        </LinearLayout>
+
+        <!-- UK Pronunciation -->
         <TextView
             android:id="@+id/tvPronounceUK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvPronounceUS"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:maxWidth="110dp"
             android:textColor="@color/dark_blue"
             android:textSize="16sp"
             android:textStyle="italic"
             tools:text="/ˈbjuː.t̬ə.fəl/" />
+
+        <LinearLayout
+            android:id="@+id/layoutPronounceUKTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_toStartOf="@id/tvPronounceUK"
+            android:layout_alignTop="@id/tvPronounceUK"
+            android:layout_marginTop="-12dp"
+            android:layout_marginEnd="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:minWidth="48dp"
+            android:gravity="center"
+            android:paddingHorizontal="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pronounce_uk_title"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="italic" />
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/ic_sound"
+                app:tint="@color/dark_blue"
+                android:contentDescription="@string/pronounce_sound" />
+        </LinearLayout>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvContents"
+        android:id="@+id/rcvMeaning"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/background_gray"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_content"
-        tools:itemCount="30"/>
+        tools:itemCount="30"
+        tools:listitem="@layout/item_meaning" />
 </LinearLayout>

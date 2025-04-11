@@ -4,6 +4,8 @@
     <string name="search_hint">Nhập từ để tra</string>
     <string name="pronounce_us_title">US</string>
     <string name="pronounce_uk_title">UK</string>
-    <string name="search_button_desc">.\n</string>
-    <string name="close_button_desc">.</string>
+    <string name="close_button_desc">.\n</string>
+    <string name="search_button_desc"> </string>
+    <string name="pronounce_sound"> </string>
+
 </resources>

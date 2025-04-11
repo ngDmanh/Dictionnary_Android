@@ -48,8 +48,13 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             tvExample = itemView.findViewById(R.id.tvExample);
         }
 
-        public void binData(@NonNull String example) {
-            tvExample.setText(example);
+        public void binData(String example) {
+            if (example == null || example.isEmpty()) {
+                tvExample.setVisibility(View.GONE);
+            } else {
+                tvExample.setText(example);
+                tvExample.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

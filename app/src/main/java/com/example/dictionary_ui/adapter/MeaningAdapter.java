@@ -9,30 +9,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dictionary_ui.R;
-import com.example.dictionary_ui.models_new.Definition;
+import com.example.dictionary_ui.models_new.Meaning;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningViewHolder> {
-    private final List<Definition> listMeaning;
+public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.ContentViewHolder> {
+    private final List<Meaning> listMeaning;
 
-    public MeaningAdapter(List<Definition> definitions) {
-        this.listMeaning = definitions == null ? new ArrayList<>() : definitions;
+    public MeaningAdapter(List<Meaning> listMeaning) {
+        this.listMeaning = listMeaning == null ? new ArrayList<>() : listMeaning;
     }
 
     @NonNull
     @Override
-    public MeaningViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meaning, parent, false);
-        return new MeaningViewHolder(view);
+        return new ContentViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MeaningViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ContentViewHolder holder, int position) {
         if (position < listMeaning.size()) {
-            Definition definition = listMeaning.get(position);
-            if (definition != null) holder.binData(definition);
+            Meaning meaning = listMeaning.get(position);
+            if (meaning != null) holder.binData(meaning);
         }
     }
 
@@ -41,23 +41,21 @@ public class MeaningAdapter extends RecyclerView.Adapter<MeaningAdapter.MeaningV
         return listMeaning.size();
     }
 
-    public static class MeaningViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvMeaning;
-        private final RecyclerView rcvExamples;
+    public static class ContentViewHolder extends RecyclerView.ViewHolder {
+        private final TextView tvPartOfSpeech;
+        private final RecyclerView rcvDefinition;
 
-        public MeaningViewHolder(@NonNull View itemView) {
+        public ContentViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvMeaning = itemView.findViewById(R.id.tvMeaning);
-            rcvExamples = itemView.findViewById(R.id.rcvExamples);
+            tvPartOfSpeech = itemView.findViewById(R.id.tvPartOfSpeech);
+            rcvDefinition = itemView.findViewById(R.id.rcvDefinition);
         }
 
-        public void binData(@NonNull Definition definition) {
-            tvMeaning.setText(definition.getDefinition());
-            List<String> list = new ArrayList<String>();
-            list.add(definition.getExample());
-            ExampleAdapter exampleAdapter = new ExampleAdapter(list);
-            rcvExamples.setAdapter(exampleAdapter);
-            exampleAdapter.notifyDataSetChanged();
+        public void binData(@NonNull Meaning meaning) {
+            tvPartOfSpeech.setText(meaning.getPartOfSpeech());
+            DefinitionAdapter definitionAdapter = new DefinitionAdapter(meaning.getDefinitions());
+            rcvDefinition.setAdapter(definitionAdapter);
+            definitionAdapter.notifyDataSetChanged();
         }
     }
 }
