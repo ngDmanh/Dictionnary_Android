@@ -55,7 +55,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
         private final TextView tvWord;
         private final TextView tvPronounceUS;
         private final TextView tvPronounceUK;
-        private final RecyclerView rcvContents;
+        private final RecyclerView rcvMeaning;
         private final LinearLayout layoutPronounceUSTitle,layoutPronounceUKTitle;
 
         public WordViewHolder(@NonNull View itemView) {
@@ -63,7 +63,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
             tvWord = itemView.findViewById(R.id.tvWord);
             tvPronounceUS = itemView.findViewById(R.id.tvPronounceUS);
             tvPronounceUK = itemView.findViewById(R.id.tvPronounceUK);
-            rcvContents = itemView.findViewById(R.id.rcvMeaning);
+            rcvMeaning = itemView.findViewById(R.id.rcvMeaning);
             layoutPronounceUSTitle = itemView.findViewById(R.id.layoutPronounceUSTitle);
             layoutPronounceUKTitle = itemView.findViewById(R.id.layoutPronounceUKTitle);
         }
@@ -88,8 +88,8 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
                 }
             });
             MeaningAdapter meaningAdapter = new MeaningAdapter(word.getMeanings());
-            rcvContents.setHasFixedSize(true);
-            rcvContents.setAdapter(meaningAdapter);
+            rcvMeaning.setHasFixedSize(true);
+            rcvMeaning.setAdapter(meaningAdapter);
             meaningAdapter.notifyDataSetChanged();
         }
         private void playAudioWithExoPlayer(String audioUrl, Context context) {
