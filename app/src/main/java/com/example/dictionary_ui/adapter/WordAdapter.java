@@ -1,7 +1,7 @@
 package com.example.dictionary_ui.adapter;
 
 import android.content.Context;
-import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dictionary_ui.R;
-import com.example.dictionary_ui.models_new.Phonetics;
-import com.example.dictionary_ui.models_new.Word;
+import com.example.dictionary_ui.models.Phonetics;
+import com.example.dictionary_ui.models.Word;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.PlaybackException;
+import com.google.android.exoplayer2.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,14 +75,14 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
             tvPronounceUK.setText(phonetics == null ? "" : phonetics.getText());
             layoutPronounceUSTitle.setOnClickListener(v -> {
                 if (phonetics != null && phonetics.getAudio() != null && !phonetics.getAudio().isEmpty()) {
-                    playAudio(phonetics.getAudio(), v.getContext());
+                    playAudioWithExoPlayer(phonetics.getAudio(), v.getContext());
                 } else {
                     Toast.makeText(v.getContext(), "No audio available", Toast.LENGTH_SHORT).show();
                 }
             });
             layoutPronounceUKTitle.setOnClickListener(v -> {
                 if (phonetics != null && phonetics.getAudio() != null && !phonetics.getAudio().isEmpty()) {
-                    playAudio(phonetics.getAudio(), v.getContext());
+                    playAudioWithExoPlayer(phonetics.getAudio(), v.getContext());
                 } else {
                     Toast.makeText(v.getContext(), "No audio available", Toast.LENGTH_SHORT).show();
                 }
@@ -88,22 +92,32 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
             rcvContents.setAdapter(meaningAdapter);
             meaningAdapter.notifyDataSetChanged();
         }
-        private void playAudio(String audioUrl, Context context) {
-            MediaPlayer mediaPlayer = new MediaPlayer();
+        private void playAudioWithExoPlayer(String audioUrl, Context context) {
             try {
-                mediaPlayer.setDataSource(audioUrl);
-                mediaPlayer.setOnPreparedListener(MediaPlayer::start);
-                mediaPlayer.setOnCompletionListener(MediaPlayer::release);
-                mediaPlayer.setOnErrorListener((mp, what, extra) -> {
-                    Toast.makeText(context, "Error playing audio", Toast.LENGTH_SHORT).show();
-                    mp.release();
-                    return true;
+                ExoPlayer player = new ExoPlayer.Builder(context).build();
+                MediaItem mediaItem = MediaItem.fromUri(audioUrl);
+                player.setMediaItem(mediaItem);
+                player.prepare();
+                player.play();
+                player.addListener(new Player.Listener() {
+                    @Override
+                    public void onPlaybackStateChanged(int playbackState) {
+                        if (playbackState == Player.STATE_ENDED ||
+                                playbackState == Player.STATE_IDLE) {
+                            player.release();
+                        }
+                    }
+
+                    @Override
+                    public void onPlayerError(PlaybackException error) {
+                        Log.e("WordAdapter", "ExoPlayer error: " + error.getMessage());
+                        Toast.makeText(context, "Lỗi phát âm thanh", Toast.LENGTH_SHORT).show();
+                        player.release();
+                    }
                 });
-                mediaPlayer.prepareAsync();
             } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(context, "Failed to play audio", Toast.LENGTH_SHORT).show();
-                mediaPlayer.release();
+                Log.e("WordAdapter", "ExoPlayer exception", e);
+                Toast.makeText(context, "Lỗi khởi tạo player", Toast.LENGTH_SHORT).show();
             }
         }
     }

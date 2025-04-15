@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dictionary_ui.adapter.WordAdapter;
 import com.example.dictionary_ui.api.CambridgeAPIClient;
-import com.example.dictionary_ui.api.CambridgeService;
-import com.example.dictionary_ui.models_new.Word;
+import com.example.dictionary_ui.api.EnglishService;
+import com.example.dictionary_ui.models.Word;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity {
-    private CambridgeService cambridgeService;
+    private EnglishService englishService;
     private ImageButton ibFind;
     private EditText etWrite;
     private ImageButton ibClose;
@@ -66,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initData() {
-        cambridgeService = CambridgeAPIClient.getClient().create(CambridgeService.class);
+        englishService = CambridgeAPIClient.getClient().create(EnglishService.class);
     }
 
     void searchByKeyword(String keyword) {
-        Call<Word> call = cambridgeService.searchByKeyword(keyword);
+        Call<Word> call = englishService.searchByKeyword(keyword);
         call.enqueue(new Callback<Word>() {
 
             @Override

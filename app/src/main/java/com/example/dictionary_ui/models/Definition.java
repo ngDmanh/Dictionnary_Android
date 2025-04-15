@@ -1,4 +1,4 @@
-package com.example.dictionary_ui.models_new;
+package com.example.dictionary_ui.models;
 
 import java.util.List;
 public class Definition {

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dictionary_ui.R;
-import com.example.dictionary_ui.models_new.Meaning;
+import com.example.dictionary_ui.models.Meaning;
 
 import java.util.ArrayList;
 import java.util.List;

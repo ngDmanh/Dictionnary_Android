@@ -128,6 +128,6 @@
         android:background="@color/background_gray"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="30"
+        tools:itemCount="1"
         tools:listitem="@layout/item_meaning" />
 </LinearLayout>
