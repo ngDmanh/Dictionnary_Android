@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dictionary_ui.adapter.WordAdapter;
-import com.example.dictionary_ui.api.CambridgeAPIClient;
+import com.example.dictionary_ui.api.EnglishAPIClient;
 import com.example.dictionary_ui.api.EnglishService;
 import com.example.dictionary_ui.models.Word;
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void initData() {
-        englishService = CambridgeAPIClient.getClient().create(EnglishService.class);
+        englishService = EnglishAPIClient.getClient().create(EnglishService.class);
     }
 
     void searchByKeyword(String keyword) {
